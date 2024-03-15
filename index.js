@@ -11,6 +11,8 @@ document.getElementById('portfolioLink').addEventListener('click', function() {
     window.location.href = 'https://ryaanbarros.com.br';
 });
 
+document.getElementById('backgroundMusic').play();
+
 let alim = {
     x: 0,  // posição x
     y: 0,  // posição y
@@ -107,6 +109,13 @@ function atualizar_jogo() {
         snake.corpo[i].x = snake.corpo[i - 1].x;  // x
         snake.corpo[i].y = snake.corpo[i - 1].y;  // y
     }
+
+    if (snake.corpo[0].y > canvas.height) {
+        snake.corpo[0].y = 0;  // Aparece na parte superior da tela
+    } else if (snake.corpo[0].y < 0) {
+        snake.corpo[0].y = canvas.height;  // Aparece na parte inferior da tela
+    }
+
     // movimentar cabeça da snake
     snake.corpo[0].x += snake.sx * 5 * snake.vel;  // x
     snake.corpo[0].y += snake.sy * 5 * snake.vel;  // y
