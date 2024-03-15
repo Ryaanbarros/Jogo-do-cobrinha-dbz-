@@ -99,6 +99,22 @@ function gameloop(ptemp) {
     }
     window.requestAnimationFrame(gameloop);  // agenda próxima chamada de gameloop
 }
+let recarregandoPagina = false; // Variável para controlar se a página está sendo recarregada
+
+window.addEventListener('beforeunload', function(event) {
+    // Define recarregandoPagina como true quando a página está sendo recarregada
+    recarregandoPagina = true;
+});
+
+function verificarColisaoCorpo() {
+    // Verifica se a cabeça da cobra colidiu com alguma parte do corpo
+    for (let i = 1; i < snake.tam; i++) {
+        if (snake.corpo[0].x === snake.corpo[i].x && snake.corpo[0].y === snake.corpo[i].y) {
+            return true; // Colisão detectada
+        }
+    }
+    return false; // Nenhuma colisão detectada
+}
 
 function atualizar_jogo() {
     // IA e atualização das variáveis de jogo
@@ -159,7 +175,37 @@ function atualizar_jogo() {
     }
 
     // colisão com o corpo
+    
+    if (verificarColisaoCorpo()) {
+        // Verifica se a página está sendo recarregada, se sim, não exibe a mensagem
+        if (!recarregandoPagina) {
+            backgroundMusic.pause(); // Pausar música de fundo
+            // Exibir mensagem
+            alert("Você perdeu :(");
+            const tentarNovamente = confirm("Tentar novamente?");
+            if (tentarNovamente) {
+                iniciar_variaveis_jogo(); // Reiniciar o jogo
+                backgroundMusic.play(); // Retomar a música de fundo
+            } else {
+                // Voltar para o menu principal
+                jogo.fase = 0;
+                iniciar_variaveis_jogo();
+            }
+            return; // Parar o loop de atualização do jogo
+        }
+    }
 }
+// Reinicializa a variável recarregandoPagina quando o jogo é reiniciado
+function iniciar_variaveis_jogo() {
+    recarregandoPagina = false;
+    // Restante do código...
+}
+
+// Verifica se a página está sendo recarregada ou se é um novo jogo
+window.onload = function() {
+    iniciar_variaveis_jogo();
+};
+
 
 function desenhar_jogo() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
