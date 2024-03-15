@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    font-weight: bold;
+    background-color: black;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid;
+    cursor: none;
+}
+
+p {
+    font-size: 20px;
+}
