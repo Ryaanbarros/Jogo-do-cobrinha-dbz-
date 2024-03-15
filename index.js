@@ -67,6 +67,7 @@ function teclado(ptecla) {
     if (ptecla.key == 'Enter' && jogo.fase == 0) {
         jogo.fase = 1;  // 1 indica jogando
         iniciar_variaveis_jogo();
+        backgroundMusic.play();
     } else if (ptecla.key == 'Escape') {
         jogo.fase = 0;  // 0 indica tela inicial
         iniciar_variaveis_jogo();
