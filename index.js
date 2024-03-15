@@ -1,17 +1,21 @@
 const snd_mastigar = './snd/mastigar.mp3';
 const img_fundo = new Image();
-img_fundo.src = './img/kami.jpg';
+img_fundo.src = './img/kamisama.png';
 const canvas = document.getElementById('canvas');  // área de desenho
 const ctx = canvas.getContext('2d');
 const esfera = new Image();
 esfera.src = './img/esfera_dragao.png';
 
+let backgroundMusic = document.getElementById('backgroundMusic');
+backgroundMusic.addEventListener('ended', function() {
+    this.currentTime = 0; // Reinicia a música para o início
+    this.play(); // Inicia a reprodução novamente
+})
+backgroundMusic.play();
 
 document.getElementById('portfolioLink').addEventListener('click', function() {
     window.location.href = 'https://ryaanbarros.com.br';
 });
-
-document.getElementById('backgroundMusic').play();
 
 let alim = {
     x: 0,  // posição x
