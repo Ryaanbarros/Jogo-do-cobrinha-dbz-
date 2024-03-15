@@ -1,6 +1,6 @@
 const snd_mastigar = './snd/mastigar.mp3';
 const img_fundo = new Image();
-img_fundo.src = './img/karin.jpg';
+img_fundo.src = './img/kami.jpg';
 const canvas = document.getElementById('canvas');  // área de desenho
 const ctx = canvas.getContext('2d');
 const esfera = new Image();
