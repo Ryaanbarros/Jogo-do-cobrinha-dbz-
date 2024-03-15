@@ -6,6 +6,11 @@ const ctx = canvas.getContext('2d');
 const esfera = new Image();
 esfera.src = './img/esfera_dragao.png';
 
+
+document.getElementById('portfolioLink').addEventListener('click', function() {
+    window.location.href = 'https://ryaanbarros.com.br';
+});
+
 let alim = {
     x: 0,  // posição x
     y: 0,  // posição y
