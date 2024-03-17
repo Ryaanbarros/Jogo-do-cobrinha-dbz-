@@ -417,6 +417,12 @@ function desenhar_inicio() {
     // Desenhar a nuvem voadora do Goku
     ctx.drawImage(nuvemGoku, nuvemPosicaoX, nuvemPosicaoY, 550, 240); // Redimensiona a imagem da nuvem
 }
+// Função para reiniciar variáveis do jogo
+function reiniciarJogo() {
+    pontuacao = 0; // Reinicia a pontuação
+    corAtual = 0; // Reinicia a cor atual da cobra
+    snakeCor = cores[corAtual]; // Define a cor inicial da cobra
+}
 
 function iniciar_variaveis_jogo() {
     snake.corpo = [{x: 100, y: canvas.height / 2}];
@@ -426,6 +432,7 @@ function iniciar_variaveis_jogo() {
     snake.aum = 0;
     snake.vel = 1;
     gerar_alim();
+    reiniciarJogo();
 }
 
 function gerar_alim() {
