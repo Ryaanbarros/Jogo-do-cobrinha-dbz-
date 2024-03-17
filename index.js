@@ -348,36 +348,55 @@ function desenharEsferaTitulo(x, y, width, height) {
 
 function desenhar_inicio() {
     desenhar_jogo();
+    
+    // Desenhar o título "Snake" com cores do Dragon Ball e contorno preto
     ctx.font = "300px Trebuchet MS";
-    // sombra
-    ctx.fillStyle = '#000a';
+    
+    // Desenhar "SNA" (amarelo) com contorno preto
+    ctx.fillStyle = '#000'; // Contorno preto
+    ctx.strokeStyle = '#000'; // Contorno preto
+    ctx.lineWidth = 4; // Largura do contorno
     ctx.textAlign = 'center';
-    ctx.fillText("Snake", canvas.width / 2 + inicio.desl + 10, 355);
-    // texto
-    ctx.fillStyle = 'yellowgreen';
-    ctx.textAlign = 'center';
-    ctx.fillText("Snake", canvas.width / 2 + inicio.desl, 350);
 
+    // Letra "S" (amarelo)
+    ctx.fillStyle = '#FEDB00'; // Amarelo Dragon Ball
+    ctx.fillText("S", canvas.width / 2 + inicio.desl - 330, 355);
+    ctx.strokeText("S", canvas.width / 2 + inicio.desl - 330, 355);
+
+    // Letra "N" (amarelo)
+    ctx.fillStyle = '#FEDB00'; // Amarelo Dragon Ball
+    ctx.fillText("N", canvas.width / 2 + inicio.desl - 178, 355);
+    ctx.strokeText("N", canvas.width / 2 + inicio.desl - 178, 355);
+
+    // Letra "A" (amarelo)
+    ctx.fillStyle = '#FEDB00'; // Amarelo Dragon Ball
+    ctx.fillText("A", canvas.width / 2 + inicio.desl, 359);
+    ctx.strokeText("A", canvas.width / 2 + inicio.desl, 359);
+
+    // Letra "KE" (vermelho)
+    ctx.fillStyle = '#DB0000'; // Vermelho Dragon Ball
+    ctx.fillText("KE", canvas.width / 2 + inicio.desl + 255, 360);
+    ctx.strokeText("KE", canvas.width / 2 + inicio.desl + 255, 360);
+    
+    // Desenhar o texto "Press ENTER to Start" com sombra
     ctx.font = "60px Impact";
-    // sombra
-    ctx.fillStyle = '#000a';
-    ctx.textAlign = 'center';
-    ctx.fillText("Press  ENTER  t     Start", canvas.width / 2 + inicio.desl + 5, 425);
-    // texto
-    ctx.fillStyle = 'orange';
-    ctx.textAlign = 'center';
-    ctx.fillText("Press  ENTER  t     Start", canvas.width / 2 + inicio.desl, 420);
-      // Desenhar a esfera do dragão sem bordas brancas
-      desenharEsferaTitulo(canvas.width / 2 + inicio.desl - -89, 384, 40, 40);
-      // Desenhar a sombra da nuvem voadora do Goku
+    ctx.fillStyle = '#000a'; // Sombra
+    ctx.fillText("Press ENTER t     Start", canvas.width / 2 + inicio.desl + 5, 425); // Sombra
+    ctx.fillStyle = 'orange'; // Texto
+    ctx.fillText("Press ENTER t     Start", canvas.width / 2 + inicio.desl, 420); // Texto
+
+    // Desenhar a esfera do dragão sem bordas brancas
+    desenharEsferaTitulo(canvas.width / 2 + inicio.desl - -77, 384, 40, 40);
+
+    // Desenhar a sombra da nuvem voadora do Goku
     ctx.save(); // Salva o estado do contexto
-    ctx.filter = 'brightness(25%)'; // Aplica um filtro de brilho para escurecer a imagem
+    ctx.filter = 'brightness(30%)'; // Aplica um filtro de brilho para escurecer a imagem
     ctx.drawImage(nuvemGoku, nuvemPosicaoX + 10, nuvemPosicaoY + 10, 550, 240); // Desenha a sombra da nuvem
     ctx.restore(); // Restaura o estado do contexto para remover o filtro aplicado
-       // Desenhar a nuvem voadora do Goku
+
+    // Desenhar a nuvem voadora do Goku
     ctx.drawImage(nuvemGoku, nuvemPosicaoX, nuvemPosicaoY, 550, 240); // Redimensiona a imagem da nuvem
-      
-    }
+}
 
 function iniciar_variaveis_jogo() {
     snake.corpo = [{x: 100, y: canvas.height / 2}];
