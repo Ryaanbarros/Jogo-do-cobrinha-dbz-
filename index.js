@@ -1,4 +1,6 @@
 const snd_mastigar = './snd/mastigar.mp3';
+const snd_transformacao = './snd/transformacao.mp3';
+const snd_transformacaoNova = './snd/transformacaoNova.mp3'
 const img_fundo = new Image();
 img_fundo.src = './img/kamisama.png';
 const canvas = document.getElementById('canvas');  // área de desenho
@@ -11,7 +13,7 @@ const nuvemGoku = new Image();
 nuvemGoku.src = './img/nuvem.png'; // Caminho para a imagem da nuvem do Goku
 
 let pontuacao = 0; // Pontuação inicial
-let cores = ['gray', 'yellow', 'orange', 'red', 'blue']; // Cores para transformação
+let cores = ['gray', 'yellow', 'orange', 'red', 'blue','white']; // Cores para transformação
 let corAtual = 0; // Índice da cor atual da cobra
 
 let nuvemPosicaoX = canvas.width / 2 + 574; // Posição inicial da nuvem
@@ -188,24 +190,20 @@ function atualizar_jogo() {
     }
 
     // colisão com o corpo
-    
-    if (verificarColisaoCorpo()) {
-        // Verifica se a página está sendo recarregada, se sim, não exibe a mensagem
-        if (!recarregandoPagina) {
-            backgroundMusic.pause(); // Pausar música de fundo
-            // Exibir mensagem
-            alert("Você perdeu :(");
-            const tentarNovamente = confirm("Tentar novamente?");
-            if (tentarNovamente) {
-                iniciar_variaveis_jogo(); // Reiniciar o jogo
-                backgroundMusic.play(); // Retomar a música de fundo
-            } else {
-                // Voltar para o menu principal
-                jogo.fase = 0;
-                iniciar_variaveis_jogo();
-            }
-            return; // Parar o loop de atualização do jogo
+    if (jogo.fase === 1 && verificarColisaoCorpo()) {
+        backgroundMusic.pause(); // Pausar música de fundo
+        // Exibir mensagem
+        alert("Você perdeu :(");
+        const tentarNovamente = confirm("Tentar novamente?");
+        if (tentarNovamente) {
+            iniciar_variaveis_jogo(); // Reiniciar o jogo
+            backgroundMusic.play(); // Retomar a música de fundo
+        } else {
+            // Voltar para o menu principal
+            jogo.fase = 0;
+            iniciar_variaveis_jogo();
         }
+        return; // Parar o loop de atualização do jogo
     }
 }
 // Reinicializa a variável recarregandoPagina quando o jogo é reiniciado
@@ -223,6 +221,11 @@ function atualizarPontuacao() {
     pontuacao += 5;
     if (pontuacao % 25 === 0 && corAtual < 4) { // Se atingir múltiplos de 25 e não exceder o limite de cores
         corAtual++; // Avança para a próxima cor
+        som(snd_transformacao, 1, 1);
+    }
+    if (pontuacao === 105 && corAtual < 5) { // Se atingir 105 pontos e não exceder o limite de cores
+        corAtual++; // Avança para a próxima cor (cor branca)
+        som(snd_transformacaoNova, 1, 1); // Reproduz o efeito sonoro da nova transformação
     }
 }
 
