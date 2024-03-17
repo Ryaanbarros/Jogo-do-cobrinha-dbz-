@@ -10,6 +10,10 @@ esferaTitulo.src = './img/esfera.png';
 const nuvemGoku = new Image();
 nuvemGoku.src = './img/nuvem.png'; // Caminho para a imagem da nuvem do Goku
 
+let pontuacao = 0; // Pontuação inicial
+let cores = ['gray', 'yellow', 'orange', 'red', 'blue']; // Cores para transformação
+let corAtual = 0; // Índice da cor atual da cobra
+
 let nuvemPosicaoX = canvas.width / 2 + 574; // Posição inicial da nuvem
 let nuvemPosicaoY = 420; // Posição vertical fixa da nuvem
 
@@ -168,17 +172,19 @@ function atualizar_jogo() {
     }
 
     // verifica colisão da snake (cabeça) com o alimento
-    if (alim.ativo == true && 
-        snake.corpo[0].x > alim.x - 14 && snake.corpo[0].x < alim.x + 14 && 
+    if (alim.ativo && snake.corpo[0].x > alim.x - 14 && snake.corpo[0].x < alim.x + 14 && 
         snake.corpo[0].y > alim.y - 14 && snake.corpo[0].y < alim.y + 14) {
         som(snd_mastigar, 0.8, 1.4);
         snake.lingua = true;
         alim.ativo = false;
         snake.aum = Math.floor(Math.random() * 20 + 1);
-        if (snake.vel < 2) {  // no máximo 100% de aumento
-            snake.vel += 0.05;  // 5% de aumento na velocidade
+        if (snake.vel < 2) {
+            snake.vel += 0.05;
         }
-        iniciarMovimentoLingua()
+        iniciarMovimentoLingua();
+    
+        // Atualiza a pontuação
+        atualizarPontuacao();
     }
 
     // colisão com o corpo
@@ -212,6 +218,19 @@ function iniciar_variaveis_jogo() {
 window.onload = function() {
     iniciar_variaveis_jogo();
 };
+
+// Função para atualizar a pontuação
+function atualizarPontuacao() {
+    pontuacao += 5;
+    if (pontuacao % 25 === 0 && corAtual < 4) { // Se atingir múltiplos de 25 e não exceder o limite de cores
+        corAtual++; // Avança para a próxima cor
+    }
+}
+
+//Muda a cor da cobra conforme a pontuação
+function atualizarCorCobra() {
+    ctx.fillStyle = cores[corAtual]; // Define a cor da cobra de acordo com o índice atual
+}
 
 
 function desenhar_jogo() {
@@ -257,14 +276,16 @@ function desenhar_jogo() {
         ctx.arc(c.x + 6, c.y + 6, 15, 0, 2 * Math.PI);
         ctx.fill();
     }
-    // desenhar snake
-    ctx.fillStyle = 'cyan';
+    // Desenhar a cobra
+    ctx.fillStyle = cores[corAtual]; // Define a cor inicial da cobra
     for (let c of snake.corpo) {
-        ctx.beginPath();
-        ctx.arc(c.x, c.y, 15, 0, 2 * Math.PI);
-        ctx.fill();
-    }
-
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, 15, 0, 2 * Math.PI);
+    ctx.fill();
+}
+    ctx.fillStyle = 'white';
+    ctx.font = '24px Arial';
+    ctx.fillText('Pontuação: ' + pontuacao, 100, 40); // Exibe a pontuação no canto superior esquerdo da tela
     // desenhar olhos
     if (snake.sy == 0) { // movimento horizontal
         ctx.fillStyle = 'black';
