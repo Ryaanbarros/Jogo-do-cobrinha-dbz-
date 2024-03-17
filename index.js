@@ -211,7 +211,6 @@ function atualizar_jogo() {
 // Reinicializa a variável recarregandoPagina quando o jogo é reiniciado
 function iniciar_variaveis_jogo() {
     recarregandoPagina = false;
-    // Restante do código...
 }
 
 // Verifica se a página está sendo recarregada ou se é um novo jogo
