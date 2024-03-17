@@ -5,6 +5,13 @@ const canvas = document.getElementById('canvas');  // área de desenho
 const ctx = canvas.getContext('2d');
 const esfera = new Image();
 esfera.src = './img/esfera_dragao.png';
+const esferaTitulo = new Image();
+esferaTitulo.src = './img/esfera.png';
+const nuvemGoku = new Image();
+nuvemGoku.src = './img/nuvem.png'; // Caminho para a imagem da nuvem do Goku
+
+let nuvemPosicaoX = canvas.width / 2 + 574; // Posição inicial da nuvem
+let nuvemPosicaoY = 420; // Posição vertical fixa da nuvem
 
 let backgroundMusic = document.getElementById('backgroundMusic');
 backgroundMusic.addEventListener('ended', function() {
@@ -279,6 +286,15 @@ function iniciarMovimentoLingua() {
 }
 function atualizar_inicio() {
     atualizar_jogo();
+    // Movimento da nuvem voadora do Goku
+    nuvemPosicaoX += 0.7 * inicio.sx;
+
+    // Verifica se a nuvem atingiu os limites da tela
+    if (nuvemPosicaoX > canvas.width + 100) {
+        nuvemPosicaoX = -100; // Reposiciona a nuvem para a esquerda
+    } else if (nuvemPosicaoX < -100) {
+        nuvemPosicaoX = canvas.width + 100; // Reposiciona a nuvem para a direita
+    }
     // evita ultrapassar os limites da tela
     if (snake.corpo[0].x < 25 || snake.corpo[0].x > 1075) {  
         snake.corpo[0].x += -snake.sx * 5;
@@ -307,9 +323,32 @@ function atualizar_inicio() {
     }
 }
 
+// Função para desenhar a esfera do dragão do titulo sem bordas brancas
+function desenharEsferaTitulo(x, y, width, height) {
+    ctx.save(); // Salva o estado do contexto
+
+    // Desenha a sombra
+    ctx.beginPath();
+    ctx.arc(x + width / 2 + 6, y + height / 2.3 + 5, width / 2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    ctx.fill();
+    
+    // Recorte circular para a esfera
+    ctx.beginPath();
+    ctx.arc(x + width / 2, y + height / 2, width / 2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip(); // Aplica um recorte circular
+
+    // Desenha a esfera do dragão
+    ctx.drawImage(esferaTitulo, x, y, width, height);
+
+    ctx.restore(); // Restaura o estado do contexto
+}
+
 function desenhar_inicio() {
     desenhar_jogo();
-    ctx.font = "300px Comic Sans MS";
+    ctx.font = "300px Trebuchet MS";
     // sombra
     ctx.fillStyle = '#000a';
     ctx.textAlign = 'center';
@@ -319,16 +358,26 @@ function desenhar_inicio() {
     ctx.textAlign = 'center';
     ctx.fillText("Snake", canvas.width / 2 + inicio.desl, 350);
 
-    ctx.font = "60px Comic Sans MS";
+    ctx.font = "60px Impact";
     // sombra
     ctx.fillStyle = '#000a';
     ctx.textAlign = 'center';
-    ctx.fillText("Press ENTER to Start", canvas.width / 2 + inicio.desl + 5, 425);
+    ctx.fillText("Press  ENTER  t     Start", canvas.width / 2 + inicio.desl + 5, 425);
     // texto
-    ctx.fillStyle = 'yellow';
+    ctx.fillStyle = 'orange';
     ctx.textAlign = 'center';
-    ctx.fillText("Press ENTER to Start", canvas.width / 2 + inicio.desl, 420);
-}
+    ctx.fillText("Press  ENTER  t     Start", canvas.width / 2 + inicio.desl, 420);
+      // Desenhar a esfera do dragão sem bordas brancas
+      desenharEsferaTitulo(canvas.width / 2 + inicio.desl - -89, 384, 40, 40);
+      // Desenhar a sombra da nuvem voadora do Goku
+    ctx.save(); // Salva o estado do contexto
+    ctx.filter = 'brightness(25%)'; // Aplica um filtro de brilho para escurecer a imagem
+    ctx.drawImage(nuvemGoku, nuvemPosicaoX + 10, nuvemPosicaoY + 10, 550, 240); // Desenha a sombra da nuvem
+    ctx.restore(); // Restaura o estado do contexto para remover o filtro aplicado
+       // Desenhar a nuvem voadora do Goku
+    ctx.drawImage(nuvemGoku, nuvemPosicaoX, nuvemPosicaoY, 550, 240); // Redimensiona a imagem da nuvem
+      
+    }
 
 function iniciar_variaveis_jogo() {
     snake.corpo = [{x: 100, y: canvas.height / 2}];
