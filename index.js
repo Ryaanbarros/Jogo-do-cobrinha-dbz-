@@ -352,7 +352,7 @@ function desenhar_inicio() {
     // Desenhar o título "Snake" com cores do Dragon Ball e contorno preto
     ctx.font = "300px Trebuchet MS";
     
-    // Desenhar "SNA" (amarelo) com contorno preto
+    // Desenhar "Shen" (amarelo) com contorno preto
     ctx.fillStyle = '#000'; // Contorno preto
     ctx.strokeStyle = '#000'; // Contorno preto
     ctx.lineWidth = 4; // Largura do contorno
@@ -360,23 +360,23 @@ function desenhar_inicio() {
 
     // Letra "S" (amarelo)
     ctx.fillStyle = '#FEDB00'; // Amarelo Dragon Ball
-    ctx.fillText("S", canvas.width / 2 + inicio.desl - 330, 355);
-    ctx.strokeText("S", canvas.width / 2 + inicio.desl - 330, 355);
+    ctx.fillText("S    ", canvas.width / 2 + inicio.desl - 330, 355);
+    ctx.strokeText("S    ", canvas.width / 2 + inicio.desl - 330, 355);
 
-    // Letra "N" (amarelo)
+    // Letra "H" (amarelo)
     ctx.fillStyle = '#FEDB00'; // Amarelo Dragon Ball
-    ctx.fillText("N", canvas.width / 2 + inicio.desl - 178, 355);
-    ctx.strokeText("N", canvas.width / 2 + inicio.desl - 178, 355);
+    ctx.fillText("H", canvas.width / 2 + inicio.desl - 350, 355);
+    ctx.strokeText("H", canvas.width / 2 + inicio.desl - 350, 355);
 
     // Letra "A" (amarelo)
     ctx.fillStyle = '#FEDB00'; // Amarelo Dragon Ball
-    ctx.fillText("A", canvas.width / 2 + inicio.desl, 359);
-    ctx.strokeText("A", canvas.width / 2 + inicio.desl, 359);
+    ctx.fillText("EN", canvas.width / 2.22+ inicio.desl, 359);
+    ctx.strokeText("EN", canvas.width / 2.22 + inicio.desl, 359);
 
     // Letra "KE" (vermelho)
     ctx.fillStyle = '#DB0000'; // Vermelho Dragon Ball
-    ctx.fillText("KE", canvas.width / 2 + inicio.desl + 255, 360);
-    ctx.strokeText("KE", canvas.width / 2 + inicio.desl + 255, 360);
+    ctx.fillText("  RON", canvas.width / 2 + inicio.desl + 255, 360);
+    ctx.strokeText("  RON", canvas.width / 2 + inicio.desl + 255, 360);
     
     // Desenhar o texto "Press ENTER to Start" com sombra
     ctx.font = "60px Impact";
