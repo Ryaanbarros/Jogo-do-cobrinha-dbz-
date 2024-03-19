@@ -302,6 +302,13 @@ function desenhar_jogo() {
         ctx.arc(snake.corpo[0].x + 6, snake.corpo[0].y + snake.sy * 5, 4, 0, 2 * Math.PI);
         ctx.fill();
     }
+    //desenhar boca
+    if (snake.sy == 0) { // movimento horizontal
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(snake.corpo[0].x + snake.sx * 12, snake.corpo[0].y - -6, 2.3, 0, 2 * Math.PI);
+        ctx.fill();
+    }
 }
 function iniciarMovimentoLingua() {
     snake.lingua = true;
